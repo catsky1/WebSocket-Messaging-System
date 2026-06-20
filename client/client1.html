@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="userid" placeholder="user id">
+<button onclick="register()">Register</button>
+
+<br><br>
+
+<input id="room" placeholder="room">
+<button onclick="joinRoom()">Join Room</button>
+
+<br><br>
+
+<input id="msg" placeholder="message">
+<button onclick="sendMessage()">Send Room Message</button>
+
+<br><br>
+
+<input id="target" placeholder="target user">
+<input id="dm" placeholder="dm">
+<button onclick="sendDM()">Send DM</button>
+
+<ul id="messages"></ul>
+
+<script>
+
+const ws = new WebSocket("ws://localhost:8080");
+
+ws.onmessage = (event) => {
+
+    const li = document.createElement("li");
+
+    li.innerText = event.data;
+
+    document
+        .getElementById("messages")
+        .appendChild(li);
+
+};
+
+function register() {
+
+    ws.send(JSON.stringify({
+        type: "register",
+        userId: document.getElementById("userid").value
+    }));
+
+}
+
+function joinRoom() {
+
+    ws.send(JSON.stringify({
+        type: "join",
+        room: document.getElementById("room").value
+    }));
+
+}
+
+function sendMessage() {
+
+    ws.send(JSON.stringify({
+        type: "message",
+        room: document.getElementById("room").value,
+        text: document.getElementById("msg").value
+    }));
+
+}
+
+function sendDM() {
+
+    ws.send(JSON.stringify({
+        type: "dm",
+        to: document.getElementById("target").value,
+        text: document.getElementById("dm").value
+    }));
+
+}
+
+</script>
+
+</body>
+</html>
