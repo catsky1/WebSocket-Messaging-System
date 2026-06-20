@@ -115,10 +115,3 @@ Open `client1.html` and `client2.html` in your browser and start chatting.
 * Load balancing and horizontal scaling
 * Media and attachment support
 * End-to-end encryption
-
-## Resume Highlights
-
-* Built a WebSocket-based chat application using Node.js and PostgreSQL.
-* Implemented message persistence and offline delivery to ensure reliable communication.
-* Added delivery and read acknowledgements for message tracking.
-* Designed the backend to support multiple concurrent users and maintain chat history.
